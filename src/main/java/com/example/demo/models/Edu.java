@@ -41,4 +41,19 @@ public class Edu {
     public void setDegree(String degree) {
         this.degree = degree;
     }
+
+    @Override
+    public String toString() {
+        String returnString = "";
+
+            returnString += id;
+        if (userName != null)
+            returnString += userName;
+        if (school != null)
+            returnString += school;
+        if (degree != null)
+            returnString += degree;
+
+        return returnString;
+    }
 }

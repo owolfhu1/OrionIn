@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:replace="fragz :: heads"></th:block>
+    <title>Edit Edu</title>
 </head>
 <body>
+<div class="container">
+    <th:block th:replace="fragz :: nav"></th:block>
 
+    <form class="form-horizontal" th:action="@{/addEdu}" th:object="${work}" method="post">
+
+        <div class="form-group">
+            <input th:field="*{company}" type="text" class="form-control" placeholder="company name"/>
+        </div>
+
+        <div class="form-group">
+            <input th:field="*{title}" type="text" class="form-control" placeholder="job title"/>
+        </div>
+
+        <div class="form-group">
+            <input th:field="*{userName}" type="text" class="form-control" placeholder="tasks (sep by commas)"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="form-control">Add Work</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    document.getElementById('work').className += "active";
+</script>
 </body>
 </html>
