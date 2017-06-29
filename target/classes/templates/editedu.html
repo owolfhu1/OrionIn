@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragz :: heads"></th:block>
+    <title>Edit Edu</title>
+</head>
+<body>
+<div class="container">
+    <th:block th:replace="fragz :: nav"></th:block>
+
+    <form class="form-horizontal" th:action="@{/addEdu}" th:object="${edu}" method="post">
+
+        <div class="form-group">
+            <input th:field="*{school}" type="text" class="form-control" placeholder="school name"/>
+        </div>
+
+        <div class="form-group">
+            <input th:field="*{degree}" type="text" class="form-control" placeholder="degree type"/>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="form-control">Add Edu</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    document.getElementById('edu').className += "active";
+</script>
+</body>
+</html>

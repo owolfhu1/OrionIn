@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragz :: heads"></th:block>
+    <title>Home page</title>
+</head>
+<body>
+    <div class="container">
+        <th:block th:replace="fragz :: nav"></th:block>
+        <div class="jumbotron">
+            <h1>Welcome <th:block sec:authentication="name">error</th:block></h1>
+        </div>
+
+
+
+    </div>
+
+    <script>
+        document.getElementById('home').className += "active";
+    </script>
+</body>
+</html>
