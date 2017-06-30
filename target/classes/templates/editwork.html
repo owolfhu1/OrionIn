@@ -9,7 +9,7 @@
 <div class="container">
     <th:block th:replace="fragz :: nav"></th:block>
 
-    <form class="form-horizontal" th:action="@{/addEdu}" th:object="${work}" method="post">
+    <form class="form-horizontal" th:action="@{/addWork}" th:object="${work}" method="post">
 
         <div class="form-group">
             <input th:field="*{company}" type="text" class="form-control" placeholder="company name"/>

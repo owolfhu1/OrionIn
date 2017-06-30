@@ -13,6 +13,7 @@ public class Work {
     private String userName;
     private String title;
     private String company;
+    private int tempId;
 
     public int getId() {
         return id;
@@ -27,6 +28,14 @@ public class Work {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getTempId() {
+        return tempId;
+    }
+
+    public void setTempId(int tempId) {
+        this.tempId = tempId;
     }
 
     public String getTitle() {
