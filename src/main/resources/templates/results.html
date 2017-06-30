@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <th:block th:replace="fragz :: heads"></th:block>
+    <title>Results page</title>
+</head>
+<body>
+<div class="container">
+    <th:block th:replace="fragz :: nav"></th:block>
+    <div class="well" th:each="resume: ${resumes}">
+    <div class="well">
+        <h1 th:text="${resume.userName}">userName error</h1>
+
+        <div class="well">
+            <h2>Education:</h2>
+            <ul th:each="item : ${resume.edu}">
+                <li th:text="${item.school}">school error</li>
+                <li th:text="${item.degree}">degree error</li>
+            </ul>
+        </div>
+
+        <div class="well">
+            <h2>Work:</h2>
+            <ul th:each="item : ${resume.work}">
+                <li th:text="${item.work.title}">title error</li>
+                <li th:text="${item.work.company}">company error</li>
+                <ul th:each="task : ${item.tasks}">
+                    <li th:text="${task.thisTask}">task error</li>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="well">
+            <h2>skill:</h2>
+            <ul th:each="item : ${resume.skill}">
+                <li th:text="${item.area + ' skill level: ' + item.level}">area error</li>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('results').className += "active";
+</script>
+</body>
+</html>

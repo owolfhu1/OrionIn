@@ -38,31 +38,27 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <!-- links -->
-                    <li id="home"><a href="/home">home </a></li>
-                    <li id="edu"><a href="/editedu">edit edu </a></li>
-                    <li id="work"><a href="/editwork">edit work </a></li>
-                    <li id="skill"><a href="/editskill">edit skill </a></li>
+                    <li id="home"><a href="/">home</a></li>
+                    <li id="results"><a href="#">results</a></li>
+                    <th:block sec:authorize="hasAuthority('seeker')">
+                    <li id="edu"><a href="/editedu">edit edu</a></li>
+                    <li id="work"><a href="/editwork">edit work</a></li>
+                    <li id="skill"><a href="/editskill">edit skill</a></li>
+                    </th:block>
+
+                    <li><a href="/logout">logout</a></li>
                     <!-- links -->
                 </ul>
-                <form class="navbar-form navbar-left">
+
+                <th:block sec:authorize="hasAuthority('recruiter')">
+                <form class="navbar-form navbar-left" th:action="@{/search}" th:object="${user}" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search"/>
+                        <input th:field="*{username}" type="text" class="form-control" placeholder="user name, school, company, or skill" style="width: 300px;"/>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default">Search</button>
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                </th:block>
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>

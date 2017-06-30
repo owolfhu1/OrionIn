@@ -12,12 +12,45 @@
             <h1>Welcome <th:block sec:authentication="name">error</th:block></h1>
         </div>
 
-        <h1 th:text="${resume.userName}"></h1>
+        <th:block sec:authorize="hasAuthority('seeker')">
 
+        <div class="well">
+            <h1 th:text="${resume.userName}">userName error</h1>
+
+            <div class="well">
+                <h2>Education:</h2>
+                <ul th:each="item : ${resume.edu}">
+                   <li th:text="${item.school}">school error</li>
+                   <li th:text="${item.degree}">degree error</li>
+                </ul>
+            </div>
+
+            <div class="well">
+                <h2>Work:</h2>
+                <ul th:each="item : ${resume.work}">
+                    <li th:text="${item.work.title}">title error</li>
+                    <li th:text="${item.work.company}">company error</li>
+                    <ul th:each="task : ${item.tasks}">
+                        <li th:text="${task.thisTask}">task error</li>
+                    </ul>
+                </ul>
+            </div>
+
+            <div class="well">
+                <h2>skill:</h2>
+                <ul th:each="item : ${resume.skill}">
+                    <li th:text="${item.area + ' skill level: ' + item.level}">area error</li>
+
+                </ul>
+            </div>
+
+        </div>
+        </th:block>
     </div>
 
     <script>
         document.getElementById('home').className += "active";
+        document.getElementById('results').style.display = "none";
     </script>
 </body>
 </html>

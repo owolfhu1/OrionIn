@@ -9,4 +9,6 @@ public interface EduRepository extends CrudRepository<Edu, Integer> {
     ArrayList<Edu> findAllByUserName(String userName);
 
     boolean existsByUserName(String userName);
+
+    ArrayList<Edu> findAllBySchool(String search);
 }

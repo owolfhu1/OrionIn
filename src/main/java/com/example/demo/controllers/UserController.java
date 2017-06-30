@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.concurrent.ThreadLocalRandom;
+
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
 public class UserController {
@@ -36,10 +37,11 @@ public class UserController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
-        //test
-        console(username);
-
-        model.addAttribute("resume", new Resume(username, eduRepository, workRepository, skillRepository, taskRepository));
+        if (userDetails.getAuthorities().toString().equals("[seeker]")) {
+            model.addAttribute("resume", new Resume(username, eduRepository, workRepository, skillRepository, taskRepository));
+        } else {
+            model.addAttribute("user", new User());
+        }
         return "home";
     }
 
@@ -105,16 +107,34 @@ public class UserController {
         return "redirect:/";
     }
 
+    @RequestMapping("/search")
+    public String search(@ModelAttribute User user, Model model) {
+        String search = user.getUsername();
+        ArrayList<Resume> resumes = new ArrayList<>();
+        ArrayList<String> matches = new ArrayList<>();
+
+        for (Edu e : eduRepository.findAllBySchool(search))
+            matches.add(e.getUserName());
+        for (Work w : workRepository.findAllByCompany(search))
+            matches.add(w.getUserName());
+        for (Skill s : skillRepository.findAllByArea(search))
+            matches.add(s.getUserName());
+
+        console(matches.toString());
+
+        for (String userName : matches) {
+            resumes.add(new Resume(userName, eduRepository, workRepository, skillRepository, taskRepository));
+        }
+
+        model.addAttribute("resumes", resumes);
+        model.addAttribute("user", new User());
+        return "results";
+    }
+
+
     //prints to spring console for testing
     private void console(String format, Object... objz) {
         format = "\n" + format + "\n";
         System.out.printf(format, objz);
     }
 }
-
-/*
-
-    console("userDetails: \n    -username: %s \n    -role: %s",
-            userDetails.getUsername(), userDetails.getAuthorities());
-        console("form values: \n    -company: %s \n    -title: %s \n    -tasks: %s",
-        work.getCompany(), work.getTitle(), work.getUserName());*/

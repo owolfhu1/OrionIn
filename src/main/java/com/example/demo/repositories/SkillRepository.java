@@ -9,4 +9,6 @@ public interface SkillRepository extends CrudRepository<Skill, Integer> {
     ArrayList<Skill> findAllByUserName(String userName);
 
     boolean existsByUserName(String userName);
+
+    ArrayList<Skill> findAllByArea(String search);
 }

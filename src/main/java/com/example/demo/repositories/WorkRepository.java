@@ -10,4 +10,6 @@ public interface WorkRepository extends CrudRepository<Work, Integer>{
     ArrayList<Work> findAllByUserName(String userName);
 
     boolean existsByUserName(String userName);
+
+    ArrayList<Work> findAllByCompany(String search);
 }

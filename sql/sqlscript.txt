@@ -1,0 +1,30 @@
+create table users(
+	username varchar(50) not null,
+    password varchar(50) not null,
+    enabled boolean not null default true,
+    primary key (username)
+);
+
+create table authorities (
+	username varchar(50) not null,
+    authority varchar(50) not null,
+    constraint fk_authorities_users foreign key(username) references users (username)
+);
+
+create unique index ix_auth_username on authorities (username,authority);
+
+insert into users (username, password) values ('seeker','pass');
+insert into users (username, password) values ('seeker2','pass');
+insert into users (username, password) values ('recruiter','pass');
+
+insert into authorities (username, authority) values ('seeker','seeker');
+insert into authorities (username, authority) values ('seeker2','seeker');
+insert into authorities (username, authority) values ('recruiter','recruiter');
+
+select * from edu;
+select * from task;
+select * from user;
+select * from users;
+select * from user_roles;
+select * from work;
+select * from skill;
