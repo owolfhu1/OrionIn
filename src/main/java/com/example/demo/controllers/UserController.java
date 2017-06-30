@@ -1,9 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Edu;
-import com.example.demo.models.Skill;
-import com.example.demo.models.Task;
-import com.example.demo.models.Work;
+import com.example.demo.models.*;
 import com.example.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,7 +32,14 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+
+        //test
+        console(username);
+
+        model.addAttribute("resume", new Resume(username, eduRepository, workRepository, skillRepository, taskRepository));
         return "home";
     }
 
@@ -68,7 +72,7 @@ public class UserController {
         String username = userDetails.getUsername();
         edu.setUserName(username);
         eduRepository.save(edu);
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping("/addWork")
@@ -89,7 +93,7 @@ public class UserController {
             newTask.setWorkId(workId);
             taskRepository.save(newTask);
         }
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping("/addSkill")
@@ -98,11 +102,8 @@ public class UserController {
         String username = userDetails.getUsername();
         skill.setUserName(username);
         skillRepository.save(skill);
-        return "home";
+        return "redirect:/";
     }
-
-
-
 
     //prints to spring console for testing
     private void console(String format, Object... objz) {

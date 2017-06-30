@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:replace="fragz :: heads"></th:block>
+    <title>Edit Skill</title>
 </head>
 <body>
-
+<div class="container">
+    <th:block th:replace="fragz :: nav"></th:block>
+    <form class="form-horizontal" th:action="@{/addSkill}" th:object="${skill}" method="post">
+        <div class="form-group">
+            <input th:field="*{area}" type="text" class="form-control" placeholder="skill type"/>
+        </div>
+        <div class="form-group">
+            <p><b class="form-control">Your skill level:</b></p>
+            <input th:field="*{level}" class="form-control" type="range" min="1" max="20" step="1" value="10"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="form-control">Add Skill</button>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById('skill').className += "active";
+</script>
 </body>
 </html>

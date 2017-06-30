@@ -8,33 +8,21 @@
 <body>
 <div class="container">
     <th:block th:replace="fragz :: nav"></th:block>
-
     <form class="form-horizontal" th:action="@{/addSkill}" th:object="${skill}" method="post">
-
         <div class="form-group">
             <input th:field="*{area}" type="text" class="form-control" placeholder="skill type"/>
         </div>
-
-
-
-
         <div class="form-group">
-            <input th:field="*{degree}" type="text" class="form-control" placeholder="degree type"/>
+            <p><b class="form-control">Your skill level:</b></p>
+            <input th:field="*{level}" class="form-control" type="range" min="1" max="20" step="1" value="10"/>
         </div>
-
-
-
-
         <div class="form-group">
-            <button type="submit" class="form-control">Add Edu</button>
+            <button type="submit" class="form-control">Add Skill</button>
         </div>
-
     </form>
-
 </div>
-
 <script>
-    document.getElementById('edu').className += "active";
+    document.getElementById('skill').className += "active";
 </script>
 </body>
 </html>
